@@ -1,0 +1,45 @@
+{
+  "title": "Fatty Acids as PCM: Full Analysis for Peltier + PCM AC Model",
+  "outline": [
+    {
+      "level": "H3",
+      "text": "Q1: Can melting and grating paraffin wax lower its melting point from 58°C to 22°C?",
+      "page": 1
+    },
+    {
+      "level": "H3",
+      "text": "Q2: Can fatty acids be used instead of paraffin wax for PCMs in a Peltier-based AC model?",
+      "page": 1
+    },
+    {
+      "level": "H3",
+      "text": "Q3: Which fatty acid blend satisfies these criteria: eco-friendly, ~22°C melting point, safe, available, and works well as PCM?",
+      "page": 1
+    },
+    {
+      "level": "H3",
+      "text": "Q4: Will this Lauric + Oleic blend be efficient as paraffin?",
+      "page": 1
+    },
+    {
+      "level": "H3",
+      "text": "Q5: What are the disadvantages of using fatty acids like Lauric + Oleic as PCM?",
+      "page": 1
+    },
+    {
+      "level": "H1",
+      "text": "Fatty Acids as PCM: Full Analysis for Peltier + PCM AC Model",
+      "page": 2
+    },
+    {
+      "level": "H3",
+      "text": "Q6: Can we reuse Lauric + Oleic acid blends like paraffin wax?",
+      "page": 2
+    },
+    {
+      "level": "H3",
+      "text": "Q7: Does Lauric + Oleic blend work *similarly* to paraffin wax in a practical setup?",
+      "page": 2
+    }
+  ]
+}
