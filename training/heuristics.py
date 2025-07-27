@@ -1,26 +1,15 @@
 import re
 
 def normalize_text_spacing(text):
-    """
-    Fix spaced-out letters by removing spaces between single letters,
-    but keep spaces between words intact.
-    Example:
-      "F r o n t e n d   A s s i g n m e n t" -> "Frontend Assignment"
-    """
-    # Step 1: collapse multiple spaces into one
     text = re.sub(r'\s+', ' ', text).strip()
-
-    # Pattern matches sequences of spaced single letters (2 or more letters separated by spaces)
     pattern = r'(?:\b(?:[A-Za-z]\s){2,}[A-Za-z]\b)'
 
     def replacer(match):
-        # Remove spaces within the matched group
         return match.group(0).replace(" ", "")
 
-    # Replace all spaced single-letter sequences with letters joined together
     return re.sub(pattern, replacer, text)
 
-def process_spans(spans):
+def process_spans(spans, page_width=595):  # default A4 width in points
     if not spans:
         return []
 
@@ -33,63 +22,94 @@ def process_spans(spans):
         return []
 
     body_font_size = max(size_counts, key=size_counts.get)
+    max_size = max(size_counts.keys())
 
-    # Sort spans by page and vertical position (top coordinate)
     spans.sort(key=lambda s: (s["page"], s["bbox"][1]))
 
     processed = []
+    bold_keywords = ["bold", "black", "heavy", "semibold", "demibold", "extrabold", "extrablack", "medium"]
+
     for i, span in enumerate(spans):
         size = round(span["size"], 1)
         font_name = span["fontname"].lower()
-        is_bold = "bold" in font_name
+        is_bold = any(keyword in font_name for keyword in bold_keywords)
+        tag = "paragraph"  # default
 
-        tag = "paragraph"  # default tag
+        bbox = span["bbox"]
+        left, top, right, bottom = bbox
+        width = right - left
+        center_x = left + width / 2
 
-        if i == 0 and size >= body_font_size + 2:
+        # Check horizontal center alignment tolerance
+        center_tolerance = 50  # points, adjust as needed
+
+        is_centered = abs(center_x - page_width / 2) < center_tolerance
+        near_top_first_page = (span["page"] == 1 and top < 100)
+
+        # Title if:
+        # 1. Near top of first page
+        # 2. Bold
+        # 3. Center aligned horizontally
+        # 4. Size close to max_size or can be smaller (relax size here)
+        if near_top_first_page and is_bold and is_centered and size >= body_font_size:
             tag = "title"
-        elif size >= body_font_size + 2:
+        # Previous heuristic for multiline titles:
+        elif i < 10 and is_bold and size >= max_size - 0.3 and len(span["text"].strip()) > 3:
+            tag = "title"
+        elif size >= body_font_size + 1.8:
             tag = "h1"
         elif size >= body_font_size + 1.2:
             tag = "h2"
         elif is_bold and size >= body_font_size + 0.5:
             tag = "h3"
 
-        # Only keep title and headings, discard paragraphs
-        if tag in ("title", "h1", "h2", "h3"):
-            processed.append({
-                "text": normalize_text_spacing(span["text"]),
-                "size": size,
-                "fontname": span["fontname"],
-                "bbox": span["bbox"],
-                "page": span["page"],
-                "tag": tag
-            })
+        processed.append({
+            "text": normalize_text_spacing(span["text"]),
+            "size": size,
+            "fontname": span["fontname"],
+            "bbox": bbox,
+            "page": span["page"],
+            "tag": tag
+        })
 
     return processed
 
 def build_outline(processed_spans):
-    title_texts = []
+    title_lines = []
     outline = []
-    title_done = False
 
-    for span in processed_spans:
+    previous_title_span = None
+    collecting_title = True
+
+    for i, span in enumerate(processed_spans):
         tag = span["tag"]
         text = span["text"]
 
-        if tag == "title" and not title_done:
-            title_texts.append(text)
-        else:
-            if not title_done:
-                title_done = True
+        if tag == "title" and collecting_title:
+            # If we already have a previous title span, check spacing and font match
+            if previous_title_span:
+                prev_y = previous_title_span["bbox"][1]
+                curr_y = span["bbox"][1]
+                same_font = previous_title_span["fontname"] == span["fontname"]
+                size_diff = abs(previous_title_span["size"] - span["size"]) <= 0.2
+                vertical_gap_ok = abs(prev_y - curr_y) <= 100
 
-            if tag in ("h1", "h2", "h3"):
-                outline.append({
-                    "level": tag.upper(),
-                    "text": text,
-                    "page": span["page"]
-                })
+                if not (same_font and size_diff and vertical_gap_ok):
+                    collecting_title = False
+                    continue
 
-    title = " ".join(title_texts)
+            title_lines.append(text)
+            previous_title_span = span
+
+        elif tag in ("h1", "h2", "h3"):
+            collecting_title = False
+            outline.append({
+                "level": tag.upper(),
+                "text": text,
+                "page": span["page"]
+            })
+
+    title = " ".join(title_lines)
     title = re.sub(r"\s+", " ", title).strip()
 
     return {

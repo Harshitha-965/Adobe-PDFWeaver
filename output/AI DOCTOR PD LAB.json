@@ -1,0 +1,370 @@
+{
+  "title": "OPTIMIZING DOCTOR AVAILABILITY AND APPOINTMENT ALLOCATION IN HOSPITALS",
+  "outline": [
+    {
+      "level": "H1",
+      "text": "THROUGH DIGITAL TECHNOLOGY AND AI",
+      "page": 1
+    },
+    {
+      "level": "H1",
+      "text": "INTEGRATION",
+      "page": 1
+    },
+    {
+      "level": "H1",
+      "text": "",
+      "page": 1
+    },
+    {
+      "level": "H1",
+      "text": "A PROJECT REPORT",
+      "page": 1
+    },
+    {
+      "level": "H1",
+      "text": "HARSINI.G.S 111523102068",
+      "page": 1
+    },
+    {
+      "level": "H1",
+      "text": "JANANI.P 111523102077",
+      "page": 1
+    },
+    {
+      "level": "H1",
+      "text": "HENISHMA.A.R 111523102072",
+      "page": 1
+    },
+    {
+      "level": "H1",
+      "text": "",
+      "page": 1
+    },
+    {
+      "level": "H1",
+      "text": "",
+      "page": 1
+    },
+    {
+      "level": "H1",
+      "text": "BACHELOR OF ENGINEERING",
+      "page": 1
+    },
+    {
+      "level": "H1",
+      "text": "IN",
+      "page": 1
+    },
+    {
+      "level": "H1",
+      "text": "COMPUTER SCIENCE AND",
+      "page": 1
+    },
+    {
+      "level": "H1",
+      "text": "ENGINNERING",
+      "page": 1
+    },
+    {
+      "level": "H1",
+      "text": "R.M.D ENGINEERING COLLEGE,",
+      "page": 1
+    },
+    {
+      "level": "H1",
+      "text": "KAVARAPETTAI",
+      "page": 1
+    },
+    {
+      "level": "H1",
+      "text": "ANNA UNIVERSITY: CHENNAI 600 025",
+      "page": 1
+    },
+    {
+      "level": "H1",
+      "text": "",
+      "page": 1
+    },
+    {
+      "level": "H1",
+      "text": "",
+      "page": 1
+    },
+    {
+      "level": "H2",
+      "text": "",
+      "page": 1
+    },
+    {
+      "level": "H1",
+      "text": "ANNA UNIVERSITY: CHENNAI 600025",
+      "page": 2
+    },
+    {
+      "level": "H1",
+      "text": "",
+      "page": 2
+    },
+    {
+      "level": "H1",
+      "text": "",
+      "page": 2
+    },
+    {
+      "level": "H1",
+      "text": "BONAFIDE CERTIFICATE",
+      "page": 2
+    },
+    {
+      "level": "H2",
+      "text": "",
+      "page": 2
+    },
+    {
+      "level": "H2",
+      "text": "",
+      "page": 2
+    },
+    {
+      "level": "H1",
+      "text": "",
+      "page": 2
+    },
+    {
+      "level": "H1",
+      "text": "ABSTRACT",
+      "page": 3
+    },
+    {
+      "level": "H1",
+      "text": "",
+      "page": 3
+    },
+    {
+      "level": "H1",
+      "text": "",
+      "page": 3
+    },
+    {
+      "level": "H1",
+      "text": "",
+      "page": 3
+    },
+    {
+      "level": "H1",
+      "text": "THEME OF THE PROJECT",
+      "page": 4
+    },
+    {
+      "level": "H1",
+      "text": "",
+      "page": 4
+    },
+    {
+      "level": "H2",
+      "text": "",
+      "page": 4
+    },
+    {
+      "level": "H1",
+      "text": "PROBLEM STATEMENT",
+      "page": 5
+    },
+    {
+      "level": "H2",
+      "text": "",
+      "page": 5
+    },
+    {
+      "level": "H2",
+      "text": "",
+      "page": 5
+    },
+    {
+      "level": "H2",
+      "text": "",
+      "page": 5
+    },
+    {
+      "level": "H1",
+      "text": "OVERVIEW OF THE IDEA",
+      "page": 6
+    },
+    {
+      "level": "H1",
+      "text": "",
+      "page": 6
+    },
+    {
+      "level": "H1",
+      "text": "",
+      "page": 6
+    },
+    {
+      "level": "H2",
+      "text": "",
+      "page": 6
+    },
+    {
+      "level": "H1",
+      "text": "SOLUTION FOR THE PROBLEM STATEMENT",
+      "page": 7
+    },
+    {
+      "level": "H1",
+      "text": "",
+      "page": 7
+    },
+    {
+      "level": "H1",
+      "text": "",
+      "page": 7
+    },
+    {
+      "level": "H2",
+      "text": "",
+      "page": 7
+    },
+    {
+      "level": "H2",
+      "text": "The solution described is an improvement and innovation upon existing",
+      "page": 7
+    },
+    {
+      "level": "H2",
+      "text": "appointment allocation systems in both rural and urban infrastructures.",
+      "page": 7
+    },
+    {
+      "level": "H1",
+      "text": "FLOWCHART/PRODUCT WORKFLOW",
+      "page": 8
+    },
+    {
+      "level": "H1",
+      "text": "",
+      "page": 8
+    },
+    {
+      "level": "H1",
+      "text": "",
+      "page": 8
+    },
+    {
+      "level": "H2",
+      "text": "",
+      "page": 8
+    },
+    {
+      "level": "H2",
+      "text": "",
+      "page": 8
+    },
+    {
+      "level": "H2",
+      "text": "",
+      "page": 8
+    },
+    {
+      "level": "H2",
+      "text": "",
+      "page": 8
+    },
+    {
+      "level": "H2",
+      "text": "",
+      "page": 8
+    },
+    {
+      "level": "H2",
+      "text": "",
+      "page": 8
+    },
+    {
+      "level": "H2",
+      "text": "",
+      "page": 8
+    },
+    {
+      "level": "H1",
+      "text": "IDEA – CURRENT STATUS/ FUTURE PLAN",
+      "page": 9
+    },
+    {
+      "level": "H1",
+      "text": "",
+      "page": 9
+    },
+    {
+      "level": "H1",
+      "text": "",
+      "page": 9
+    },
+    {
+      "level": "H1",
+      "text": "",
+      "page": 9
+    },
+    {
+      "level": "H1",
+      "text": "CUSTOMER SEGMENT",
+      "page": 10
+    },
+    {
+      "level": "H1",
+      "text": "",
+      "page": 10
+    },
+    {
+      "level": "H1",
+      "text": "",
+      "page": 10
+    },
+    {
+      "level": "H2",
+      "text": "",
+      "page": 10
+    },
+    {
+      "level": "H2",
+      "text": "",
+      "page": 10
+    },
+    {
+      "level": "H1",
+      "text": "VALUE PROPOSITION",
+      "page": 11
+    },
+    {
+      "level": "H1",
+      "text": "",
+      "page": 11
+    },
+    {
+      "level": "H1",
+      "text": "",
+      "page": 11
+    },
+    {
+      "level": "H2",
+      "text": "",
+      "page": 11
+    },
+    {
+      "level": "H1",
+      "text": "",
+      "page": 11
+    },
+    {
+      "level": "H1",
+      "text": "REFERENCE DETAILS",
+      "page": 12
+    },
+    {
+      "level": "H1",
+      "text": "",
+      "page": 12
+    }
+  ]
+}
