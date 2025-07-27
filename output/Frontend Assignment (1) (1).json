@@ -1,0 +1,55 @@
+{
+  "title": "Frontend Assignment",
+  "outline": [
+    {
+      "level": "H3",
+      "text": "Frontend Developer Assignment:",
+      "page": 1
+    },
+    {
+      "level": "H3",
+      "text": "",
+      "page": 1
+    },
+    {
+      "level": "H1",
+      "text": "Objective",
+      "page": 1
+    },
+    {
+      "level": "H1",
+      "text": "1. Web Page + Styling",
+      "page": 1
+    },
+    {
+      "level": "H3",
+      "text": "",
+      "page": 1
+    },
+    {
+      "level": "H1",
+      "text": "2.Speed Control Feature (JavaScript)",
+      "page": 2
+    },
+    {
+      "level": "H1",
+      "text": "3. Bonus Features (Optional)",
+      "page": 2
+    },
+    {
+      "level": "H1",
+      "text": "4. Demo Video",
+      "page": 2
+    },
+    {
+      "level": "H1",
+      "text": "5.Submit the following:",
+      "page": 3
+    },
+    {
+      "level": "H1",
+      "text": "6.Evaluation Criteria",
+      "page": 3
+    }
+  ]
+}
