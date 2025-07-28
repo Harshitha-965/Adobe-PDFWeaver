@@ -9,7 +9,7 @@ def normalize_text_spacing(text):
 
     return re.sub(pattern, replacer, text)
 
-def process_spans(spans, page_width=595):  # default A4 width in points
+def process_spans(spans, page_width=595):
     if not spans:
         return []
 
@@ -30,33 +30,29 @@ def process_spans(spans, page_width=595):  # default A4 width in points
     bold_keywords = ["bold", "black", "heavy", "semibold", "demibold", "extrabold", "extrablack", "medium"]
 
     for i, span in enumerate(spans):
+        text = span["text"].strip()
+        if not text:
+            continue
+
         size = round(span["size"], 1)
         font_name = span["fontname"].lower()
         is_bold = any(keyword in font_name for keyword in bold_keywords)
-        tag = "paragraph"  # default
+        tag = "paragraph"
 
         bbox = span["bbox"]
         left, top, right, bottom = bbox
         width = right - left
         center_x = left + width / 2
 
-        # Check horizontal center alignment tolerance
-        center_tolerance = 50  # points, adjust as needed
-
+        center_tolerance = 50
         is_centered = abs(center_x - page_width / 2) < center_tolerance
-        near_top_first_page = (span["page"] == 1 and top < 100)
+        near_top_first_page = (span["page"] == 1 and top < 200)
 
-        # Title if:
-        # 1. Near top of first page
-        # 2. Bold
-        # 3. Center aligned horizontally
-        # 4. Size close to max_size or can be smaller (relax size here)
         if near_top_first_page and is_bold and is_centered and size >= body_font_size:
             tag = "title"
-        # Previous heuristic for multiline titles:
-        elif i < 10 and is_bold and size >= max_size - 0.3 and len(span["text"].strip()) > 3:
+        elif i < 15 and is_bold and size >= max_size - 0.3 and len(text) > 3:
             tag = "title"
-        elif size >= body_font_size + 1.8:
+        elif size >= body_font_size + 1.5:
             tag = "h1"
         elif size >= body_font_size + 1.2:
             tag = "h2"
@@ -64,7 +60,7 @@ def process_spans(spans, page_width=595):  # default A4 width in points
             tag = "h3"
 
         processed.append({
-            "text": normalize_text_spacing(span["text"]),
+            "text": normalize_text_spacing(text),
             "size": size,
             "fontname": span["fontname"],
             "bbox": bbox,
@@ -80,33 +76,51 @@ def build_outline(processed_spans):
 
     previous_title_span = None
     collecting_title = True
+    title_fontname = None
+    title_fontsize = None
+    title_page = 1
 
     for i, span in enumerate(processed_spans):
         tag = span["tag"]
         text = span["text"]
+        page = span["page"]
 
-        if tag == "title" and collecting_title:
-            # If we already have a previous title span, check spacing and font match
+        if collecting_title and tag == "title":
             if previous_title_span:
                 prev_y = previous_title_span["bbox"][1]
                 curr_y = span["bbox"][1]
-                same_font = previous_title_span["fontname"] == span["fontname"]
-                size_diff = abs(previous_title_span["size"] - span["size"]) <= 0.2
-                vertical_gap_ok = abs(prev_y - curr_y) <= 100
+                vertical_gap = abs(curr_y - prev_y)
 
-                if not (same_font and size_diff and vertical_gap_ok):
+                same_font = previous_title_span["fontname"] == span["fontname"]
+                size_diff = abs(previous_title_span["size"] - span["size"]) <= 0.3
+                gap_ok = vertical_gap <= 110
+
+                if same_font and size_diff and gap_ok and page == title_page:
+                    title_lines.append(text)
+                    previous_title_span = span
+                else:
                     collecting_title = False
                     continue
-
-            title_lines.append(text)
-            previous_title_span = span
-
+            else:
+                title_lines.append(text)
+                previous_title_span = span
+                title_fontname = span["fontname"]
+                title_fontsize = span["size"]
+                title_page = page
         elif tag in ("h1", "h2", "h3"):
-            collecting_title = False
+            if collecting_title:
+                # Avoid treating paragraph directly under a multi-line title as heading
+                if previous_title_span:
+                    prev_bottom = previous_title_span["bbox"][3]
+                    curr_top = span["bbox"][1]
+                    if span["page"] == title_page and 0 < curr_top - prev_bottom < 50:
+                        continue
+                collecting_title = False
+
             outline.append({
                 "level": tag.upper(),
                 "text": text,
-                "page": span["page"]
+                "page": page
             })
 
     title = " ".join(title_lines)

@@ -2,7 +2,7 @@ import os
 import json
 from collections import defaultdict, Counter
 import pdfplumber
-from heuristics import process_spans, build_outline
+from training.heuristics import process_spans, build_outline
 
 INPUT_FOLDER = "input"
 OUTPUT_FOLDER = "output"
